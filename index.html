@@ -111,6 +111,16 @@
             color: #4A5568;
         }
     </style>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CLNDL2RECC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'G-CLNDL2RECC');
+</script>
+
 </head>
 <body class="bg-gray-50">
     <!-- 헤더 및 내비게이션 -->
@@ -815,5 +825,26 @@
             answer.style.display = 'none';
         });
     </script>
+
+<script>
+  // CTA 클릭 추적
+  document.querySelectorAll('.btn-primary').forEach(btn => {
+    btn.addEventListener('click', () => {
+      gtag('event', 'cta_click', {
+        event_category: 'engagement',
+        event_label: '무료 체험 CTA',
+      });
+    });
+  });
+
+  // 폼 제출 추적
+  document.querySelector('#trial-form form')?.addEventListener('submit', function(e) {
+    gtag('event', 'lead_submit', {
+      event_category: 'form',
+      event_label: '무료 체험 신청',
+    });
+  });
+</script>
+
 </body>
 </html>
