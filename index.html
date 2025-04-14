@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>블로그중개왕 - 공인중개사를 위한 블로그 자동 생성 서비스</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            color: #333;
+            line-height: 1.6;
+        }
+        .hero-pattern {
+            background-color: #EBF4FF;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%234299e1' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        .section-title {
+            position: relative;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background-color: #3182CE;
+        }
+        .testimonial {
+            position: relative;
+        }
+        .testimonial::before {
+            content: '"';
+            font-size: 5rem;
+            color: #EBF4FF;
+            position: absolute;
+            top: -1.5rem;
+            left: -1rem;
+            z-index: -1;
+        }
+        .highlight {
+            background: linear-gradient(180deg, rgba(255,255,255,0) 60%, rgba(104,178,255,0.4) 40%);
+        }
+        .btn-primary {
+            background-color: #3182CE;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #2C5282;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        .step-item {
+            position: relative;
+        }
+        .step-number {
+            background-color: #3182CE;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 1rem;
+        }
+        .step-connector {
+            position: absolute;
+            top: 36px;
+            left: 18px;
+            width: 2px;
+            height: calc(100% - 36px);
+            background-color: #E2E8F0;
+            z-index: -1;
+        }
+        .benefit-card {
+            border-radius: 12px;
+            background-color: white;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .faq-item {
+            border-bottom: 1px solid #E2E8F0;
+        }
+        .faq-question {
+            cursor: pointer;
+            padding: 1.5rem 1rem;
+            font-weight: 500;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .faq-answer {
+            padding: 0 1rem 1.5rem 1rem;
+            color: #4A5568;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- 헤더 및 내비게이션 -->
+    <header class="bg-white shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <div class="text-2xl font-bold text-blue-600">블로그중개왕</div>
+                <span class="ml-2 text-sm bg-blue-100 text-blue-800 px-2 py-1 rounded">공인중개사 전용</span>
+            </div>
+            <nav class="hidden md:flex space-x-8">
+                <a href="#features" class="text-gray-600 hover:text-blue-600 transition-colors duration-300">주요 기능</a>
+                <a href="#how-it-works" class="text-gray-600 hover:text-blue-600 transition-colors duration-300">이용 방법</a>
+                <a href="#success-stories" class="text-gray-600 hover:text-blue-600 transition-colors duration-300">성공 사례</a>
+                <a href="#pricing" class="text-gray-600 hover:text-blue-600 transition-colors duration-300">요금제</a>
+                <a href="#faq" class="text-gray-600 hover:text-blue-600 transition-colors duration-300">자주 묻는 질문</a>
+            </nav>
+            <div class="hidden md:block">
+                <a href="#trial-form" class="btn-primary">무료 체험 신청</a>
+            </div>
+            <div class="md:hidden">
+                <button class="text-gray-500 focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 히어로 섹션 -->
+    <section class="hero-pattern">
+        <div class="container mx-auto px-4 py-16 md:py-24">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-8 md:mb-0">
+                    <h1 class="text-3xl md:text-5xl font-bold leading-tight mb-4">
+                        <span class="text-blue-600">5분만에</span> 완성하는<br>
+                        매물 소개 블로그
+                    </h1>
+                    <p class="text-xl md:text-2xl text-gray-600 mb-6">
+                        매물 정보만 입력하면 <span class="highlight font-medium">AI가 자동으로</span><br>
+                        전문적인 블로그 글을 작성해 드립니다.
+                    </p>
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                        <a href="#trial-form" class="btn-primary text-center">
+                            무료로 시작하기
+                        </a>
+                        <a href="#demo-video" class="flex items-center justify-center px-6 py-3 bg-white border border-blue-500 text-blue-600 rounded-lg hover:bg-blue-50 transition-colors duration-300">
+                            <i class="fas fa-play-circle mr-2"></i> 서비스 시연 보기
+                        </a>
+                    </div>
+                    <div class="mt-8 flex items-center text-sm text-gray-500">
+                        <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                        <span>설치 필요 없음</span>
+                        <i class="fas fa-check-circle text-green-500 ml-6 mr-2"></i>
+                        <span>복잡한 기술 지식 불필요</span>
+                    </div>
+                </div>
+                <div class="md:w-1/2">
+                    <div class="relative">
+                        <div class="bg-white p-4 rounded-lg shadow-xl">
+                            <img src="https://cdn.jsdelivr.net/gh/heatlevel/blog-images/real-estate-blog-sample.png" alt="블로그 자동 생성 예시" class="rounded-lg w-full">
+                            <div class="absolute -bottom-4 -right-4 bg-blue-600 text-white px-4 py-2 rounded-lg shadow-lg">
+                                <div class="text-sm">평균 작성 시간</div>
+                                <div class="text-xl font-bold">5분 → 30초</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 주요 이점 섹션 -->
+    <section id="features" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">공인중개사를 위한 <span class="text-blue-600">특별한 혜택</span></h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    블로그중개왕은 공인중개사님들의 업무 효율을 극대화하고 고객 유치를 도와드립니다.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- 이점 1 -->
+                <div class="benefit-card p-6">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-clock text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">시간 절약</h3>
+                    <p class="text-gray-600">
+                        매물 정보만 입력하면 AI가 자동으로 전문적인 블로그 글을 작성해 드립니다. 한 건당 평균 30분에서 1시간 소요되던 작업이 단 30초 만에 완료됩니다.
+                    </p>
+                </div>
+                
+                <!-- 이점 2 -->
+                <div class="benefit-card p-6">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-users text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">고객 유치 증가</h3>
+                    <p class="text-gray-600">
+                        검색 최적화된 블로그 글로 네이버 검색에 노출되어 잠재 고객 유치가 평균 3배 이상 증가합니다. 전문적인 글로 신뢰도도 함께 상승합니다.
+                    </p>
+                </div>
+                
+                <!-- 이점 3 -->
+                <div class="benefit-card p-6">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-magic text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">쉬운 사용법</h3>
+                    <p class="text-gray-600">
+                        디지털에 익숙하지 않아도 누구나 쉽게 사용할 수 있습니다. 단순한 입력 폼만 작성하면 전문적인 블로그 글이 자동으로 생성됩니다.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="mt-16 bg-blue-50 p-8 rounded-xl">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2 mb-6 md:mb-0">
+                        <h3 class="text-2xl font-bold mb-4">공인중개사 특화 AI 기술</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>부동산 전문 용어와 법률 정보가 포함된 <strong>특화 콘텐츠</strong></span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>지역별 교통, 학군, 상권 정보를 <strong>자동으로 분석하여 추가</strong></span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>네이버 검색 노출에 <strong>최적화된 키워드</strong> 자동 추천</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span><strong>공인중개사의 경험과 노하우</strong>가 녹아있는 글 스타일</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="md:w-1/2 md:pl-8">
+                        <div class="bg-white p-4 rounded-lg shadow-md">
+                            <img src="https://cdn.jsdelivr.net/gh/heatlevel/blog-images/ai-real-estate-dashboard.png" alt="AI 대시보드" class="rounded-lg w-full">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 사용 방법 섹션 -->
+    <section id="how-it-works" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">블로그중개왕 <span class="text-blue-600">이용 방법</span></h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    단 3단계로 전문적인 부동산 블로그를 손쉽게 작성하세요
+                </p>
+            </div>
+            
+            <div class="max-w-3xl mx-auto">
+                <!-- 단계 1 -->
+                <div class="step-item flex mb-12 relative">
+                    <div class="step-connector"></div>
+                    <div class="step-number">1</div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-2">매물 정보 입력</h3>
+                        <p class="text-gray-600 mb-4">
+                            물건의 위치, 면적, 가격, 특징 등 기본 정보만 입력하세요. 간단한 양식으로 필수 정보만 요청합니다.
+                        </p>
+                        <div class="bg-white p-4 rounded-lg shadow-md">
+                            <img src="https://cdn.jsdelivr.net/gh/heatlevel/blog-images/property-input-form.png" alt="매물 정보 입력 양식" class="rounded-lg w-full">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 단계 2 -->
+                <div class="step-item flex mb-12 relative">
+                    <div class="step-connector"></div>
+                    <div class="step-number">2</div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-2">AI 자동 글 작성</h3>
+                        <p class="text-gray-600 mb-4">
+                            버튼 한 번으로 AI가 전문적인 블로그 글을 자동으로 작성합니다. 내용 검토 후 필요시 수정할 수 있습니다.
+                        </p>
+                        <div class="bg-white p-4 rounded-lg shadow-md">
+                            <img src="https://cdn.jsdelivr.net/gh/heatlevel/blog-images/ai-writing-process.png" alt="AI 글 작성 과정" class="rounded-lg w-full">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 단계 3 -->
+                <div class="step-item flex relative">
+                    <div class="step-number">3</div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-2">네이버 블로그에 자동 게시</h3>
+                        <p class="text-gray-600 mb-4">
+                            한 번의 클릭으로 네이버 블로그에 자동으로 게시됩니다. 이미지 삽입과 서식도 자동으로 적용됩니다.
+                        </p>
+                        <div class="bg-white p-4 rounded-lg shadow-md">
+                            <img src="https://cdn.jsdelivr.net/gh/heatlevel/blog-images/blog-publish-result.png" alt="네이버 블로그 게시 결과" class="rounded-lg w-full">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 데모 비디오 -->
+            <div id="demo-video" class="mt-16 text-center">
+                <h3 class="text-2xl font-bold mb-6">서비스 시연 영상</h3>
+                <div class="max-w-3xl mx-auto bg-white p-4 rounded-lg shadow-md">
+                    <video controls playsinline webkit-playsinline class="w-full rounded-lg">
+                        <source src="https://cdn.jsdelivr.net/gh/heatlevel/blog-videos/blog-service-demo.mp4" type="video/mp4">
+                        브라우저가 비디오 태그를 지원하지 않습니다.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 성공 사례 섹션 -->
+    <section id="success-stories" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">공인중개사 <span class="text-blue-600">성공 사례</span></h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    블로그중개왕을 통해 업무 효율과 매출이 향상된 공인중개사님들의 실제 사례를 소개합니다
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- 성공 사례 1 -->
+                <div class="bg-blue-50 p-6 rounded-xl">
+                    <div class="flex items-start mb-4">
+                        <img src="https://cdn.jsdelivr.net/gh/heatlevel/blog-images/testimonial-1.png" alt="김영수 공인중개사" class="w-20 h-20 rounded-full object-cover mr-4">
+                        <div>
+                            <h3 class="text-xl font-bold">김영수 공인중개사</h3>
+                            <p class="text-gray-600">서울 강남구 | 15년 경력</p>
+                        </div>
+                    </div>
+                    <div class="testimonial">
+                        <p class="text-gray-700 mb-4">
+                            "블로그 작성에 하루 2시간씩 쓰던 시간이 이제 몇 분으로 줄었습니다. 덕분에 더 많은 매물을 소개할 수 있게 되었고, 온라인으로 찾아오는 고객이 한 달 만에 3배 늘었습니다. 디지털에 익숙하지 않은 저도 쉽게 사용할 수 있어 큰 도움이 됩니다."
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <i class="fas fa-star text-yellow-500"></i>
+                                <i class="fas fa-star text-yellow-500"></i>
+                                <i class="fas fa-star text-yellow-500"></i>
+                                <i class="fas fa-star text-yellow-500"></i>
+                                <i class="fas fa-star text-yellow-500"></i>
+                            </div>
+                            <div>
+                                <span class="font-bold text-blue-600">월 방문자</span>
+                                <span class="text-gray-600">150명 → 450명</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 성공 사례 2 -->
+                <div class="bg-blue-50 p-6 rounded-xl">
+                    <div class="flex items-start mb-4">
+                        <img src="https://cdn.jsdelivr.net/gh/heatlevel/blog-images/testimonial-2.png" alt="박미경 공인중개사" class="w-20 h-20 rounded-full object-cover mr-4">
+                        <div>
+                            <h3 class="text-xl font-bold">박미경 공인중개사</h3>
+                            <p class="text-gray-600">경기도 분당구 | 8년 경력</p>
+                        </div>
+                    </div>
+                    <div class="testimonial">
+                        <p class="text-gray-700 mb-4">
+                            "블로그를 운영하고 싶었지만 글쓰기가 어려워 시작을 못했었습니다. 블로그중개왕을 사용한 후 매일 1건씩 글을 올리게 되었고, 2개월 만에 네이버 검색에 제 글이 상위에 노출되기 시작했습니다. 지금은 블로그를 통해 한 달에 2-3건의 거래가 성사됩니다."
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <i class="fas fa-star text-yellow-500"></i>
+                                <i class="fas fa-star text-yellow-500"></i>
+                                <i class="fas fa-star text-yellow-500"></i>
+                                <i class="fas fa-star text-yellow-500"></i>
+                                <i class="fas fa-star text-yellow-500"></i>
+                            </div>
+                            <div>
+                                <span class="font-bold text-blue-600">월 계약 건수</span>
+                                <span class="text-gray-600">5건 → 8건</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 성과 통계 -->
+            <div class="mt-16 bg-gray-100 p-8 rounded-xl">
+                <h3 class="text-2xl font-bold mb-6 text-center">서비스 평균 이용 성과</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="text-center">
+                        <div class="text-blue-600 text-4xl font-bold mb-2">78%</div>
+                        <p class="text-gray-600">블로그 글 작성 시간 단축</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-blue-600 text-4xl font-bold mb-2">3.2배</div>
+                        <p class="text-gray-600">월평균 블로그 방문자 증가</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-blue-600 text-4xl font-bold mb-2">42%</div>
+                        <p class="text-gray-600">블로그 경유 계약 건수 증가</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 요금제 섹션 -->
+    <section id="pricing" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">합리적인 <span class="text-blue-600">요금제</span></h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    매물 수와 사용 빈도에 따라 선택할 수 있는 다양한 요금제를 제공합니다
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <!-- 스타터 요금제 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-1">스타터</h3>
+                        <p class="text-gray-500 mb-4">소규모 중개업소에 적합</p>
+                        <div class="text-3xl font-bold mb-4">
+                            월 5만원
+                        </div>
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>월 30건 블로그 글 생성</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>기본 템플릿 3종</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>자동 네이버 블로그 게시</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>이메일 기술 지원</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="p-6 bg-gray-50">
+                        <a href="#trial-form" class="block w-full py-3 text-center bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-300">
+                            무료로 시작하기
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- 프로 요금제 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden transform scale-105 border-2 border-blue-500">
+                    <div class="bg-blue-600 text-white text-center py-2 text-sm font-bold">
+                        가장 인기 있는 요금제
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-1">프로</h3>
+                        <p class="text-gray-500 mb-4">활발한 중개업소에 적합</p>
+                        <div class="text-3xl font-bold mb-4">
+                            월 9만원
+                        </div>
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>월 100건 블로그 글 생성</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>프리미엄 템플릿 8종</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>자동 네이버 블로그 게시</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>SEO 키워드 자동 최적화</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>우선 기술 지원</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="p-6 bg-gray-50">
+                        <a href="#trial-form" class="block w-full py-3 text-center bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-300">
+                            무료로 시작하기
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- 비즈니스 요금제 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-1">비즈니스</h3>
+                        <p class="text-gray-500 mb-4">대형 중개업소에 적합</p>
+                        <div class="text-3xl font-bold mb-4">
+                            월 15만원
+                        </div>
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>무제한 블로그 글 생성</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>모든 템플릿 무제한 사용</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>네이버 블로그 및 카페 자동 게시</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>고급 SEO 키워드 분석</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>전담 매니저 지원</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>맞춤형 템플릿 제작</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="p-6 bg-gray-50">
+                        <a href="#trial-form" class="block w-full py-3 text-center bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-300">
+                            무료로 시작하기
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-8 text-gray-500">
+                모든 요금제는 7일간 무료로 체험하실 수 있습니다. 신용카드 정보가 필요하지 않습니다.
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ 섹션 -->
+    <section id="faq" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">자주 묻는 <span class="text-blue-600">질문</span></h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    공인중개사님들이 가장 많이 궁금해하시는 질문에 답변해 드립니다
+                </p>
+            </div>
+            
+            <div class="max-w-3xl mx-auto">
+                <!-- FAQ 아이템 1 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>컴퓨터를 잘 다루지 못해도 사용할 수 있나요?</span>
+                        <i class="fas fa-chevron-down text-gray-400"></i>
+                    </div>
+                    <div class="faq-answer">
+                        네, 블로그중개왕은 컴퓨터에 익숙하지 않은 분들도 쉽게 사용할 수 있도록 설계되었습니다. 간단한 입력 폼에 매물 정보만 넣으면 AI가 자동으로 글을 작성합니다. 또한 필요시 전화 상담을 통해 사용 방법을 안내해 드립니다.
+                    </div>
+                </div>
+                
+                <!-- FAQ 아이템 2 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>AI가 작성한 글이 전문적으로 보이나요?</span>
+                        <i class="fas fa-chevron-down text-gray-400"></i>
+                    </div>
+                    <div class="faq-answer">
+                        네, 블로그중개왕의 AI는 수천 개의 부동산 블로그 글을 학습하여 전문적인 문체와 용어를 사용합니다. 또한 지역별 특성, 교통, 학군, 상권 정보 등을 자동으로 포함하여 매물의 장점을 효과적으로 소개합니다. 수정이 필요한 경우 간단히 편집할 수도 있습니다.
+                    </div>
+                </div>
+                
+                <!-- FAQ 아이템 3 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>블로그 계정이 없어도 사용할 수 있나요?</span>
+                        <i class="fas fa-chevron-down text-gray-400"></i>
+                    </div>
+                    <div class="faq-answer">
+                        블로그중개왕을 사용하려면 네이버 블로그 계정이 필요합니다. 블로그 계정이 없으신 분들을 위해 계정 생성 및 초기 설정을 무료로 도와드리는 서비스도 제공하고 있습니다. 문의주시면 안내해 드리겠습니다.
+                    </div>
+                </div>
+                
+                <!-- FAQ 아이템 4 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>어떤 유형의 부동산을 소개할 수 있나요?</span>
+                        <i class="fas fa-chevron-down text-gray-400"></i>
+                    </div>
+                    <div class="faq-answer">
+                        아파트, 빌라, 오피스텔, 단독주택, 상가, 토지 등 모든 유형의 부동산에 대한 블로그 글을 작성할 수 있습니다. 각 부동산 유형별로 최적화된 템플릿이 준비되어 있어 특성에 맞는 설명이 자동으로 생성됩니다.
+                    </div>
+                </div>
+                
+                <!-- FAQ 아이템 5 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>네이버에서 검색 노출이 잘 되나요?</span>
+                        <i class="fas fa-chevron-down text-gray-400"></i>
+                    </div>
+                    <div class="faq-answer">
+                        네, 블로그중개왕은 네이버 검색 알고리즘에 최적화된 글을 생성합니다. SEO 키워드가 자동으로 포함되어 검색 노출 가능성이 높아집니다. 프로 요금제 이상 사용 시 더 강화된 SEO 최적화 기능을 제공하여 상위 노출 확률을 높입니다.
+                    </div>
+                </div>
+                
+                <!-- FAQ 아이템 6 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>무료 체험은 어떻게 신청하나요?</span>
+                        <i class="fas fa-chevron-down text-gray-400"></i>
+                    </div>
+                    <div class="faq-answer">
+                        아래 무료 체험 신청 양식을 작성하시면 즉시 7일간의 무료 체험 계정이 생성됩니다. 신용카드 정보 없이도 모든 기능을 테스트해보실 수 있으며, 체험 기간이 끝나도 자동 결제되지 않으니 안심하고 이용하실 수 있습니다.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 무료 체험 신청 폼 -->
+    <section id="trial-form" class="py-16 bg-blue-100">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">지금 바로 <span class="text-blue-600">무료로 시작</span>하세요</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    7일간 무료로 모든 기능을 체험해보세요. 신용카드 정보가 필요하지 않습니다.
+                </p>
+            </div>
+            
+            <div class="max-w-2xl mx-auto bg-white p-8 rounded-xl shadow-lg">
+                <form action="#" method="post">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <label for="name" class="block text-gray-700 font-medium mb-2">이름</label>
+                            <input type="text" id="name" name="name" placeholder="홍길동" required
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label for="phone" class="block text-gray-700 font-medium mb-2">연락처</label>
+                            <input type="tel" id="phone" name="phone" placeholder="010-1234-5678" required
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label for="email" class="block text-gray-700 font-medium mb-2">이메일</label>
+                        <input type="email" id="email" name="email" placeholder="example@example.com" required
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label for="company" class="block text-gray-700 font-medium mb-2">중개사무소명</label>
+                        <input type="text" id="company" name="company" placeholder="행복한부동산" required
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label for="plan" class="block text-gray-700 font-medium mb-2">관심 요금제</label>
+                        <select id="plan" name="plan" required
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="">요금제 선택</option>
+                            <option value="starter">스타터 (월 5만원)</option>
+                            <option value="pro" selected>프로 (월 9만원)</option>
+                            <option value="business">비즈니스 (월 15만원)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <div class="flex items-start">
+                            <input type="checkbox" id="agree" name="agree" required
+                                   class="mt-1 mr-2">
+                            <label for="agree" class="text-gray-600">
+                                <span>개인정보 수집 및 이용에 동의합니다.</span>
+                                <a href="#" class="text-blue-600 underline">개인정보 처리방침</a>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="w-full py-4 bg-blue-600 text-white rounded-lg font-bold text-lg hover:bg-blue-700 transition-colors duration-300">
+                        무료 체험 시작하기
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- 하단 CTA 섹션 -->
+    <section class="py-16 bg-blue-600 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-6">이제 블로그 작성으로 시간 낭비하지 마세요</h2>
+            <p class="text-xl mb-8 max-w-3xl mx-auto">
+                매물 정보만 입력하면 AI가 전문적인 블로그 글을 자동으로 작성해 드립니다.<br>
+                시간을 절약하고 더 많은 고객을 만나보세요.
+            </p>
+            <a href="#trial-form" class="inline-block px-8 py-4 bg-white text-blue-600 rounded-lg font-bold text-lg hover:bg-blue-50 transition-colors duration-300">
+                무료로 시작하기
+            </a>
+        </div>
+    </section>
+
+    <!-- 푸터 -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">블로그중개왕</h3>
+                    <p class="text-gray-400 mb-4">
+                        공인중개사를 위한<br>
+                        블로그 자동 생성 서비스
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
+                            <i class="fab fa-blog"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">서비스</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#features" class="text-gray-400 hover:text-white transition-colors duration-300">주요 기능</a></li>
+                        <li><a href="#how-it-works" class="text-gray-400 hover:text-white transition-colors duration-300">이용 방법</a></li>
+                        <li><a href="#pricing" class="text-gray-400 hover:text-white transition-colors duration-300">요금제</a></li>
+                        <li><a href="#success-stories" class="text-gray-400 hover:text-white transition-colors duration-300">성공 사례</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">고객지원</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#faq" class="text-gray-400 hover:text-white transition-colors duration-300">자주 묻는 질문</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">이용 가이드</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">문의하기</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">개인정보 처리방침</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">서비스 이용약관</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">연락처</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1.5 mr-2"></i>
+                            <span>서울특별시 강남구 테헤란로 123, 4층</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-2"></i>
+                            <span>02-123-4567</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2"></i>
+                            <span>contact@blogkingdom.kr</span>
+                        </li>
+                        <li class="flex items-center mt-4">
+                            <span>평일 09:00 - 18:00</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400 text-sm">
+                &copy; 2025 블로그중개왕. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ 토글 기능
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const icon = question.querySelector('i');
+                
+                // 답변 토글
+                if (answer.style.display === 'block') {
+                    answer.style.display = 'none';
+                    icon.classList.remove('fa-chevron-up');
+                    icon.classList.add('fa-chevron-down');
+                } else {
+                    answer.style.display = 'block';
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-up');
+                }
+            });
+        });
+        
+        // 초기에는 모든 답변 숨기기
+        document.querySelectorAll('.faq-answer').forEach(answer => {
+            answer.style.display = 'none';
+        });
+    </script>
+</body>
+</html>
